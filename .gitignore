@@ -1,0 +1,9 @@
+*~
+*.pyc
+*.swp
+*#
+.metadata
+.DS_Store
+*.log
+venv
+settings.py
