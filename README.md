@@ -19,23 +19,33 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 ## Section 2 - Fundamental Concepts
 
 ### Evolution of Computer Applications
-
 - One server (mainframes)
 - Multiple monolithic servers (app server, db server)
 - Dozens of micro application servers (Cloud)
+  - Encapsulation
+  - Task distribution
+  - Data Sharding
 
 ### Asynchronous Tasks
+- The concept of queues
+- Pub/Sub
+- Explain Celery + Transport (RabbitMQ, Redis, MongoDB)
 
 ### RESTful APIs
 
 ### Linux Application Basics
 - RPMs and yum
+- Virtualenvs
 
 ## Section 3 - Development environment
 
 ### Docker
 
 ### Compose
+
+### MongoDB
+
+### Redis
 
 ## Section 4 - FlaskBook
 
