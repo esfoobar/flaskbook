@@ -11,6 +11,7 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 
 ### What are the prerequisites?
 - Python basics (Udemy Flask course)
+- Git basics (Udemy Flask course)
 
 ### What do I need to have to complete the course?
 - Mac is preferred
