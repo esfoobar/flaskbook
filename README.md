@@ -44,7 +44,7 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 - RPMs and yum
 - Virtualenvs
 
-## Section 3 - Development environment
+## Section 3 - The Professional Developer Toolbox
 
 ### Docker
 
@@ -58,9 +58,17 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 
 ## Section 4 - FlaskBook
 
+### Anatomy of the Application
+- Client -> server (SOA)
+- API driven
+
 ## Section 5 - Deployment
 
 ### Cloud Providers Overview
+- AWS
+- Rackspace
+- OpenShift
+- Digital Ocean
 
 ### Deploying FlaskBook in Digital Ocean
 
