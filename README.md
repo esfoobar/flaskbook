@@ -31,6 +31,13 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 - Pub/Sub
 - Explain Celery + Transport (RabbitMQ, Redis, MongoDB)
 
+### Caching and Load Distribution
+- Caching concept
+  - Hardware (Memcached, Varnish)
+  - CDN (Cloudfront, Akamai)
+- Load balancing
+  - Sticky sessions
+
 ### RESTful APIs
 
 ### Linux Application Basics
@@ -45,7 +52,9 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 
 ### MongoDB
 
-### Redis
+### Celery/Redis
+
+### Memcached
 
 ## Section 4 - FlaskBook
 
