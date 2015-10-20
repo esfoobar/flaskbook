@@ -11,10 +11,10 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 
 ### What are the prerequisites?
 - Python basics (Udemy Flask course)
-- Git basics (Udemy Flask course)
 
 ### What do I need to have to complete the course?
-- Mac is preferred
+- A computer with high speed internet connection
+- A free account with Cloud9
 
 ## Section 2 - Fundamental Concepts
 
@@ -44,25 +44,13 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 - RPMs and yum
 - Virtualenvs
 
-## Section 3 - The Professional Developer Toolbox
-
-### Docker
-
-### Compose
-
-### MongoDB
-
-### Celery/Redis
-
-### Memcached
-
-## Section 4 - FlaskBook
+## Section 3 - FlaskBook
 
 ### Anatomy of the Application
 - Client -> server (SOA)
 - API / App server benefits (mobile clients easier)
 
-## Section 5 - Deployment
+## Section 4 - Deployment
 
 ### Cloud Providers Overview
 - AWS
@@ -74,8 +62,6 @@ A social application built for the Udemy course "Advanced Professional Web Devel
 
 ### Fabric
 
-### Swarm?
+## Section 5 - Final Project
 
-## Section 6 - Final Project
-
-## Section 7 - Conclusion
+## Section 6 - Conclusion
