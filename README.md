@@ -38,3 +38,6 @@ db.test.update(
     }
 )
 ```
+
+## MongoDB Python ORM
+- We'll be using MongoEngine to interact with MongoDB from our Python application
