@@ -41,3 +41,5 @@ db.test.update(
 
 ## MongoDB Python ORM
 - We'll be using MongoEngine to interact with MongoDB from our Python application
+- What is an ORM?
+- Create the requirements.txt with Flask and Mongoengine
