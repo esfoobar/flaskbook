@@ -26,42 +26,38 @@ A social application built for the Udemy course "Advanced Professional Web Devel
   - Task distribution
   - Data Sharding
 
-### Asynchronous Tasks
+## Section 3 - Flaskbook, a Social Network
+- Introduction to MongoDB
+- Working with Flask Blueprints
+- The User Module
+- The Relationship Module
+- The Feed Module
+
+## Section 4 - Asynchronous Tasks
 - The concept of queues
 - Pub/Sub
 - Explain Celery + Transport (RabbitMQ, Redis, MongoDB)
 
-### Caching and Load Distribution
+## Section 5 - Caching and Load Distribution
 - Caching concept
   - Hardware (Memcached, Varnish)
   - CDN (Cloudfront, Akamai)
 - Load balancing
-  - Sticky sessions
+ - Sticky sessions
 
-### RESTful APIs
+## Section 6 - Building an API for our application
 
-### Linux Application Basics
-- RPMs and yum
-- Virtualenvs
+## Section 7 - Deployment
 
-## Section 3 - FlaskBook
+- Cloud Providers Overview
+  - AWS
+  - Rackspace
+  - OpenShift
+  - Digital Ocean
 
-### Anatomy of the Application
-- Client -> server (SOA)
-- API / App server benefits (mobile clients easier)
+- Deploying FlaskBook in Digital Ocean
+  - Fabric
 
-## Section 4 - Deployment
+## Section 7 - Final Project
 
-### Cloud Providers Overview
-- AWS
-- Rackspace
-- OpenShift
-- Digital Ocean
-
-### Deploying FlaskBook in Digital Ocean
-
-### Fabric
-
-## Section 5 - Final Project
-
-## Section 6 - Conclusion
+## Section 8 - Conclusion
