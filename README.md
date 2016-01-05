@@ -14,6 +14,7 @@
 - You also need a log directory: `mkdir ~/log`
 - Create the mongodb config
 - Start the client with `mongod -f mongod.conf`
+- Login to mongo `mongo`
 
 ## Playing with MongoDB
 - Create a database by inserting a record: `db.test.insert({name: "Jorge", last_name: "Escobar"})`
