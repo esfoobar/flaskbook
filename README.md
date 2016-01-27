@@ -1,6 +1,6 @@
 # FlaskBook
 
-A social application built for the Udemy course "Advanced Professional Web Development with Python Flask".
+A social application built for the Udemy course "Advanced Scalable Python Web Development Using Flask".
 
 ## Course Summary
 
