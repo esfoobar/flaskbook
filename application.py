@@ -5,5 +5,11 @@ def create_app():
 
     # Load config
     app.config.from_pyfile('settings.py')
+    
+    # import blueprints
+    from user.views import user_app
+
+    # register blueprints
+    app.register_blueprint(user_app)
 
     return app
