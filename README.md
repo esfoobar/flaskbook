@@ -9,6 +9,8 @@
  - Create settings.py
  - Create application
  - Create manage.py
- - Run the app `python manage.py runserver`. You will see a 404, since we don't have views.
+ - Create a runner using:
+    - Command: /home/ubuntu/workspace/flaskbook/venv/bin/python3 /home/ubuntu/workspace/flaskbook/manage.py runserver
+ - Run the app using RUN
 
 
