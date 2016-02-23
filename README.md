@@ -14,6 +14,7 @@
 - You also need a log directory: `mkdir ~/log`
 - Create the mongodb config
 - Start the client with `mongod -f mongod.conf`
+- Note: sometimes when your cloud9 instance goes to sleep without properly closing mongodb, you can get an error `exited with error number 100`. Just delete the mongod.lock by doing `rm -fr ~/data/mongod.lock`.
 - Login to mongo `mongo`
 
 ## Playing with MongoDB
