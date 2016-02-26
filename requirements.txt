@@ -1,3 +1,4 @@
 flask
 flask-script
 flask-mongoengine
+flask-wtf
