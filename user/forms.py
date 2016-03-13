@@ -21,9 +21,9 @@ class RegisterForm(Form):
     confirm = PasswordField('Repeat Password')
     
     def validate_username(form, field):
-            if User.objects.filter(username=field.data).first():
-                raise ValidationError('Username already exists')
+        if User.objects.filter(username=field.data).first():
+            raise ValidationError('Username already exists')
                 
     def validate_email(form, field):
-            if User.objects.filter(email=field.data).first():
-                raise ValidationError('Email is already in use')
+        if User.objects.filter(email=field.data).first():
+            raise ValidationError('Email is already in use')
