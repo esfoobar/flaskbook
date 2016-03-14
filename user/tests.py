@@ -2,6 +2,8 @@ from application import create_app as create_app_base
 from mongoengine.connection import _get_db
 import unittest
 
+from user.models import User
+
 class UserTest(unittest.TestCase):
     def create_app(self):
         self.db_name = 'flaskbook_test'
@@ -29,5 +31,4 @@ class UserTest(unittest.TestCase):
                 password="test123",
                 confirm="test123"
             ), follow_redirects=True)
-        print(rv.data)
-        assert 'User registered' in str(rv.data)
+        assert User.objects.filter(username='jorge').count() == 1
