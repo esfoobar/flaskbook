@@ -17,11 +17,11 @@ def user_register():
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(form.password.data, salt)
         user = User(
-            form.username.data,
-            hashed_password,
-            form.email.data,
-            form.first_name.data,
-            form.last_name.data,
+            username=form.username.data,
+            password=hashed_password,
+            email=form.email.data,
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
         )
         user.save()
         return "User registered"
