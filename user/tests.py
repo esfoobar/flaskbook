@@ -1,6 +1,7 @@
 from application import create_app as create_app_base
 from mongoengine.connection import _get_db
 import unittest
+from flask import session
 
 from user.models import User
 
@@ -11,7 +12,7 @@ class UserTest(unittest.TestCase):
             MONGODB_SETTINGS={'DB': self.db_name},
             TESTING=True,
             WTF_CSRF_ENABLED=False,
-            SECRET_KEY = 'mySecret!'
+            SECRET_KEY = 'mySecret!',
         )
 
     def setUp(self):
@@ -46,4 +47,7 @@ class UserTest(unittest.TestCase):
             username=self.user_dict()['username'],
             password=self.user_dict()['password']
             ))
-        print(rv.data)
+        
+        with self.app as c:
+            rv = c.get('/login')
+            assert session.get("username") == self.user_dict()['username']
