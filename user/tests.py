@@ -47,7 +47,7 @@ class UserTest(unittest.TestCase):
             username=self.user_dict()['username'],
             password=self.user_dict()['password']
             ))
-        
+        # check the session is set
         with self.app as c:
-            rv = c.get('/login')
+            rv = c.get('/')
             assert session.get("username") == self.user_dict()['username']
