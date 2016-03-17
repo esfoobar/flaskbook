@@ -11,6 +11,7 @@ class UserTest(unittest.TestCase):
             MONGODB_SETTINGS={'DB': self.db_name},
             TESTING=True,
             WTF_CSRF_ENABLED=False,
+            SECRET_KEY = 'mySecret!'
         )
 
     def setUp(self):
@@ -20,15 +21,29 @@ class UserTest(unittest.TestCase):
     def tearDown(self):
         db = _get_db()
         db.client.drop_database(db)
-
-    def test_register_user(self):
-        # basic registration
-        rv = self.app.post('/register', data=dict(
+        
+    def user_dict(self):
+        return dict(
                 first_name="Jorge",
                 last_name="Escobar",
                 username="jorge",
                 email="jorge@example.com",
                 password="test123",
                 confirm="test123"
-            ), follow_redirects=True)
+                )
+
+    def test_register_user(self):
+        # basic registration
+        rv = self.app.post('/register', data=self.user_dict(), 
+            follow_redirects=True)
         assert User.objects.filter(username='jorge').count() == 1
+        
+    def test_login_user(self):
+        # create a user
+        self.app.post('/register', data=self.user_dict())
+        # login the user
+        rv = self.app.post('/login', data=dict(
+            username=self.user_dict()['username'],
+            password=self.user_dict()['password']
+            ))
+        print(rv.data)
