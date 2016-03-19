@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, flash
+from flask import Blueprint, render_template, request, redirect, session, url_for
 import bcrypt
 
 from user.models import User
@@ -21,7 +21,6 @@ def login():
         if user:
             if bcrypt.hashpw(form.password.data, user.password) == user.password:
                 session['username'] = form.username.data
-                flash("User %s logged in" % user.username)
                 if 'next' in session:
                     next = session.get('next')
                     session.pop('next')
@@ -50,3 +49,12 @@ def user_register():
         user.save()
         return "User registered"
     return render_template('user/register.html', form=form)
+    
+@user_app.route('/logout', methods=('GET', 'POST'))
+def logout():
+    session.pop('username')
+    return redirect(url_for('user_app.login'))
+    
+@user_app.route('/profile', methods=('GET', 'POST'))
+def user_profile():
+    return render_template('user/profile.html')

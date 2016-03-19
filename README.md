@@ -1,9 +1,9 @@
-# Step 8
+# Step 9
 
-## User Login
-    - Login function
-    - Write a test for it
-        - Here we use context (the with function), because without the with block, 
-        the assert would fail with an error because request is no longer available 
-        (because you are trying to use it outside of the actual request).
+## User Profile
+    - Create a nav bar with logged in user
+    - Create a logout function
+    - Create a profile page
+
+
     
