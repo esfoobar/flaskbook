@@ -8,6 +8,6 @@ def user_login():
     return "User login"
     
 @user_app.route('/register', methods=('GET', 'POST'))
-def user_register():
+def register():
     form = RegisterForm()
     return render_template('user/register.html', form=form)
