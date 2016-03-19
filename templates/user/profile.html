@@ -1,17 +1,20 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
-{% block title %}Registration{% endblock %}
+{% block title %}{{ user.username }} - Profile{% endblock %} 
 
-{% block content %}
+{% block content %} 
 
 {% include "navbar.html" %}
 
 <div class="row">
 
-  <div class="col-md-offset-3 col-md-6">
-      
-      
-      
+  <div class="col-md-3">
+
+    <img class="img-thumbnail" src="http://placehold.it/200x200" width="200" heigh="200" alt="{{ user.username }}">
+
+    <h3>{{ user.first_name }} {{ user.last_name }} </h3>
+    <h4><a href="{{ url_for('user_app.profile', username=user.username) }}" />@{{ user.username }}</a></h4>
+
   </div>
 
 </div>
