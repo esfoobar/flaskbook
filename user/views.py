@@ -34,7 +34,7 @@ def login():
     return render_template('user/login.html', form=form, error=error)
 
 @user_app.route('/register', methods=('GET', 'POST'))
-def user_register():
+def register():
     form = RegisterForm()
     if form.validate_on_submit():
         salt = bcrypt.gensalt()
@@ -56,5 +56,5 @@ def logout():
     return redirect(url_for('user_app.login'))
     
 @user_app.route('/profile', methods=('GET', 'POST'))
-def user_profile():
+def profile():
     return render_template('user/profile.html')

@@ -11,7 +11,7 @@
     <h3>Registration</h3>
 
     {% from "_formhelpers.html" import render_field %}
-    <form method="POST" action="{{ url_for('.user_register')}}" role="form">
+    <form method="POST" action="{{ url_for('.register')}}" role="form">
 
       {{ form.hidden_tag() }}
 
