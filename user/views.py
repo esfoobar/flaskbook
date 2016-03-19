@@ -11,7 +11,7 @@ def user_login():
     return "User login"
     
 @user_app.route('/register', methods=('GET', 'POST'))
-def user_register():
+def register():
     form = RegisterForm()
     if form.validate_on_submit():
         salt = bcrypt.gensalt()
