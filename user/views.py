@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, flash
+from flask import Blueprint, render_template, request, redirect, session
 import bcrypt
 
 from user.models import User
@@ -21,7 +21,6 @@ def login():
         if user:
             if bcrypt.hashpw(form.password.data, user.password) == user.password:
                 session['username'] = form.username.data
-                flash("User %s logged in" % user.username)
                 if 'next' in session:
                     next = session.get('next')
                     session.pop('next')
