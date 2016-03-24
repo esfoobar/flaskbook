@@ -1,6 +1,6 @@
 # Step 10
 
-## User Profile
+## User Profile 
     - Change URL scheme to allow for usernames
     - Add the image placeholder and name on profile
     - Add the friends toolbar
