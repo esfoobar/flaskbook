@@ -51,3 +51,15 @@ class UserTest(unittest.TestCase):
         with self.app as c:
             rv = c.get('/')
             assert session.get("username") == self.user_dict()['username']
+            
+    def test_edit_profile(self):
+        # create a user
+        self.app.post('/register', data=self.user_dict())
+        # login the user
+        rv = self.app.post('/login', data=dict(
+            username=self.user_dict()['username'],
+            password=self.user_dict()['password']
+            ))
+        # check that user can edit his profile
+        rv = self.app.get('/' + self.user_dict()['username'])
+        assert "Edit profile" in str(rv.data)

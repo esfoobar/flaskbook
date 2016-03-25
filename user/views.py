@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for
+from flask import Blueprint, render_template, request, redirect, session, url_for, abort
 import bcrypt
 
 from user.models import User
@@ -57,5 +57,11 @@ def logout():
     
 @user_app.route('/<username>', methods=('GET', 'POST'))
 def profile(username):
+    edit_profile = False
     user = User.objects.filter(username=username).first()
-    return render_template('user/profile.html', user=user)
+    if session.get('username') and user.username == session.get('username'):
+        edit_profile = True
+    if user:
+        return render_template('user/profile.html', user=user, edit_profile=edit_profile)
+    else:
+        abort(404)
