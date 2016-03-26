@@ -8,6 +8,7 @@
         - Modify user model's bio length
         
     - Minor validation changes
+        - Create a UserBaseForm class
         - Do a regex for username
         - Put email and username to lower case using signals (install blinker first)
         

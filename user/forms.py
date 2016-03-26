@@ -7,7 +7,7 @@ import re
 
 from user.models import User
 
-class RegisterForm(Form):
+class BaseUserForm(Form):
     first_name = StringField('First Name', [validators.DataRequired()])
     last_name = StringField('Last Name', [validators.DataRequired()])
     email = EmailField('Email address', [validators.DataRequired(), validators.Email()])
@@ -15,6 +15,12 @@ class RegisterForm(Form):
             validators.DataRequired(),
             validators.Length(min=4, max=25)
         ])
+    bio = StringField('Bio', 
+            widget=TextArea(),
+            validators=[validators.Length(max=160)]
+        )
+
+class RegisterForm(BaseUserForm):
     password = PasswordField('New Password', [
             validators.DataRequired(),
             validators.EqualTo('confirm', message='Passwords must match'),
@@ -34,23 +40,13 @@ class RegisterForm(Form):
             
 class LoginForm(Form):
     username = StringField('Username', [
-            validators.Required(),
-            validators.Length(min=4, max=25)
-        ])
-    password = PasswordField('Password', [
-            validators.Required(),
-            validators.Length(min=4, max=80)
-        ])
-        
-class EditForm(Form):
-    first_name = StringField('First Name', [validators.DataRequired()])
-    last_name = StringField('Last Name', [validators.DataRequired()])
-    email = EmailField('Email address', [validators.DataRequired(), validators.Email()])
-    username = StringField('Username', [
             validators.DataRequired(),
             validators.Length(min=4, max=25)
         ])
-    bio = StringField('Bio', 
-            widget=TextArea(),
-            validators=[validators.Length(max=160)]
-        )
+    password = PasswordField('Password', [
+            validators.DataRequired(),
+            validators.Length(min=4, max=80)
+        ])
+        
+class EditForm(BaseUserForm):
+    pass
