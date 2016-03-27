@@ -1,17 +1,23 @@
-# Step 11
+# Step 12
 
-## User Edit 
-    - Be able to edit your profile if you're looking at your own profile
-        - Check the edit_profile flag on views
-        - Add the if/then on the profile view 
-        - Create edit form and add bio
-        - Modify user model's bio length
-        
-    - Minor validation changes
-        - Create a UserBaseForm class
-        - Do a regex for username
-        - Put email and username to lower case using signals (install blinker first)
-        
-    - Write a test for edit on profile page
-
+## Password work
+    - Change password functionality
+        - New view/template
     
+## Emailing with AWS SES
+    - Explain how to send email via SES
+        - Create an AWS account
+        - Create a user on IAM
+        - Go to IAM/Policies and attach AmazonSESFullAccess to your user
+    - Install boto
+    - Test sending an email:
+        - `python manage.py shell`
+        - `import boto.ses`
+        - `conn = boto.ses.connect_to_region('us-east-1',aws_access_key_id=‘xxx’,aws_secret_access_key=‘xxx’)`
+        - `conn`
+        - `conn.list_verified_email_addresses()`
+        - `conn.send_email('webmaster@fromzero.io','Test subject','Can you read this?’,[jorge@example.com])`
+    
+## Forgot username / password
+    - Add a link on login page
+    - Add a view with a form
