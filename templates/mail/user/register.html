@@ -4,6 +4,6 @@
 <p>Hi {{ user.first_name }} and thanks for registering in Flaskbook!</p>
 
 <p>To confirm your registration, please click on this link: <br />
-{{ config.HOSTNAME }}/confirm/{{ user.username }}/{{ user.email_configuration.confirmation_code }}
+{{ config.HOSTNAME }}/confirm/{{ user.username }}/{{ user.change_configuration.confirmation_code }}
 </p>
 {% endblock %}

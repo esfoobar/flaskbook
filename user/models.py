@@ -12,7 +12,7 @@ class User(db.Document):
     bio = db.StringField(db_field="bio", max_length=160)
     created = db.IntField(db_field="c", default=now())
     email_confirmed = db.BooleanField(db_field="ecf", default=False)
-    email_configuration = db.DictField(db_field="ec")
+    change_configuration = db.DictField(db_field="ec")
 
     @classmethod
     def pre_save(cls, sender, document, **kwargs):

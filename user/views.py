@@ -48,7 +48,7 @@ def register():
             email=form.email.data,
             first_name=form.first_name.data,
             last_name=form.last_name.data,
-            email_configuration={
+            change_configuration={
                 "new_email": form.email.data,
                 "confirmation_code": code
                 }
@@ -72,9 +72,9 @@ def logout():
 def profile(username):
     edit_profile = False
     user = User.objects.filter(username=username).first()
-    if session.get('username') and user.username == session.get('username'):
-        edit_profile = True
     if user:
+        if session.get('username') and user.username == session.get('username'):
+            edit_profile = True
         return render_template('user/profile.html', user=user, edit_profile=edit_profile)
     else:
         abort(404)
@@ -112,10 +112,10 @@ def edit():
 def confirm(username, code):
     edit_profile = False
     user = User.objects.filter(username=username).first()
-    if user and user.email_configuration and user.email_configuration.get('confirmation_code'):
-        if code == user.email_configuration.get('confirmation_code'):
-            user.email = user.email_configuration.get('new_email')
-            user.email_configuration = None
+    if user and user.change_configuration and user.change_configuration.get('confirmation_code'):
+        if code == user.change_configuration.get('confirmation_code'):
+            user.email = user.change_configuration.get('new_email')
+            user.change_configuration = None
             user.email_confirmed = True
             user.save()
             return render_template('user/email_confirmed.html')
