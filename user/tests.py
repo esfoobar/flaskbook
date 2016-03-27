@@ -55,6 +55,20 @@ class UserTest(unittest.TestCase):
             follow_redirects=True)
         assert User.objects.filter(username=user3['username'].lower()).count() == 1
         
+        # confirm the user
+        user = User.objects.get(username=self.user_dict()['username'])
+        code = user.change_configuration.get('confirmation_code')
+        rv = self.app.get('/confirm/' + user.username + '/' + code)
+        assert "Your email has been confirmed" in str(rv.data)
+
+        # try again to confirm
+        rv = self.app.get('/confirm/' + user.username + '/' + code)
+        assert rv.status_code == 404
+        
+        # check change configuration is empty
+        user = User.objects.get(username=self.user_dict()['username'])
+        assert user.change_configuration == {}
+        
     def test_login_user(self):
         # create a user
         self.app.post('/register', data=self.user_dict())
@@ -115,3 +129,15 @@ class UserTest(unittest.TestCase):
         user['username'] = "TestUsername"
         rv = self.app.post('/edit', data=user)
         assert "Username already exists" in str(rv.data)
+        
+    def test_get_profile(self):
+        # create a user
+        self.app.post('/register', data=self.user_dict())
+        
+        # get the user's profile
+        rv = self.app.get('/' + self.user_dict()['username'])
+        assert self.user_dict()['username'] in str(rv.data)
+        
+        # get a 404 if unexisting user
+        rv = self.app.get('/noexist')
+        assert rv.status_code == 404

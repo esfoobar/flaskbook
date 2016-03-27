@@ -14,9 +14,10 @@
         - Create a HOSTNAME on settings.py (explain dev vs prod)
         - Change the URLs on the email templates
         - Send the email from register views
-    -> We need to skip sending email when running test
+    - We need to skip sending email when running test
     - Write a test for new confirm functionality
     
 ## If user changes emails
     - Need to set email_confirmed to False and send confirmation email
+    - Write tests for it
     

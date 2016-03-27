@@ -115,7 +115,7 @@ def confirm(username, code):
     if user and user.change_configuration and user.change_configuration.get('confirmation_code'):
         if code == user.change_configuration.get('confirmation_code'):
             user.email = user.change_configuration.get('new_email')
-            user.change_configuration = None
+            user.change_configuration = {}
             user.email_confirmed = True
             user.save()
             return render_template('user/email_confirmed.html')
