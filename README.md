@@ -15,6 +15,7 @@
         - `import boto.ses`
         - `conn = boto.ses.connect_to_region('us-east-1',aws_access_key_id=‘xxx’,aws_secret_access_key=‘xxx’)`
         - `conn`
+        - `conn.verify_email_address(‘webmaster@fromzero.io’)`
         - `conn.list_verified_email_addresses()`
         - `conn.send_email('webmaster@fromzero.io','Test subject','Can you read this?’,[jorge@example.com])`
     
