@@ -28,6 +28,6 @@ user = User.objects.first()
 body_html = render_template('mail/user/register.html', user=user)
 body_text = render_template('mail/user/register.txt', user=user)
 from utilities.common import email
-email('j@jorge3.com', 'Welcome to Flaskbook', body_html, body_text)
+email('user@example.com', 'Welcome to Flaskbook', body_html, body_text)
 ```
     - Teach that this is an async job and that we'll see more of those soon
