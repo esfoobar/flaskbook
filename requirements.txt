@@ -4,4 +4,4 @@ flask-mongoengine
 flask-wtf
 py-bcrypt
 blinker
-boto
+boto3
