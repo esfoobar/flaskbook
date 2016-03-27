@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, session, url_for, abort
 import bcrypt
+import uuid
 
 from user.models import User
 from user.forms import RegisterForm, LoginForm, EditForm
+from utilities.common import email
 
 user_app = Blueprint('user_app', __name__)
 
@@ -39,14 +41,25 @@ def register():
     if form.validate_on_submit():
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(form.password.data, salt)
+        code = str(uuid.uuid4())
         user = User(
             username=form.username.data,
             password=hashed_password,
             email=form.email.data,
             first_name=form.first_name.data,
             last_name=form.last_name.data,
+            email_configuration={
+                "new_email": form.email.data,
+                "confirmation_code": code
+                }
         )
+        
+        # email the user
+        body_html = render_template('mail/user/register.html', user=user)
+        body_text = render_template('mail/user/register.txt', user=user)
+        email(user.email, "Welcome to Flaskbook", body_html, body_text)
         user.save()
+        
         return "User registered"
     return render_template('user/register.html', form=form)
     
@@ -94,3 +107,16 @@ def edit():
         return render_template('user/edit.html', form=form, error=error, message=message)
     else:
         abort(404)
+        
+@user_app.route('/confirm/<username>/<code>')
+def confirm(username, code):
+    edit_profile = False
+    user = User.objects.filter(username=username).first()
+    if user and user.email_configuration and user.email_configuration.get('confirmation_code'):
+        if code == user.email_configuration.get('confirmation_code'):
+            user.email = user.email_configuration.get('new_email')
+            user.email_configuration = None
+            user.email_confirmed = True
+            user.save()
+            return render_template('user/email_confirmed.html')
+    abort(404)
