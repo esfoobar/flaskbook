@@ -13,6 +13,7 @@
     - Test sending an email:
         - `python manage.py shell`
         - `import boto.ses`
+        - For the next step, check the SMTP settings to see what region to use
         - `conn = boto.ses.connect_to_region('us-east-1',aws_access_key_id=‘xxx’,aws_secret_access_key=‘xxx’)`
         - `conn`
         - `conn.verify_email_address(‘webmaster@fromzero.io’)`
