@@ -88,14 +88,14 @@ def edit():
         form = EditForm(obj=user)
         if form.validate_on_submit():
             # check if new username
-            if user.username != form.username.data:
+            if user.username != form.username.data.lower():
                 if User.objects.filter(username=form.username.data.lower()).first():
                     error = 'Username already exists'  
                 else:
                     session['username'] = form.username.data.lower()
                     form.username.data = form.username.data.lower()
             # check if new email
-            if user.email != form.email.data:
+            if user.email != form.email.data.lower():
                 if User.objects.filter(email=form.email.data.lower()).first():
                     error = 'Email already exists'
                 else:

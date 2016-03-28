@@ -29,13 +29,13 @@ class RegisterForm(BaseUserForm):
     confirm = PasswordField('Repeat Password')
     
     def validate_username(form, field):
-        if User.objects.filter(username=field.data).first():
+        if User.objects.filter(username=field.data.lower()).first():
             raise ValidationError('Username already exists')
         if not re.match("^[a-zA-Z0-9_-]{4,25}$", field.data):
             raise ValidationError('Invalid username')
                 
     def validate_email(form, field):
-        if User.objects.filter(email=field.data).first():
+        if User.objects.filter(email=field.data.lower()).first():
             raise ValidationError('Email is already in use')
             
 class LoginForm(Form):

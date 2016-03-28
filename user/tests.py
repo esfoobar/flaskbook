@@ -85,11 +85,18 @@ class UserTest(unittest.TestCase):
     def test_edit_profile(self):
         # create a user
         self.app.post('/register', data=self.user_dict())
+        
+        # confirm the user
+        user = User.objects.get(username=self.user_dict()['username'])
+        code = user.change_configuration.get('confirmation_code')
+        rv = self.app.get('/confirm/' + user.username + '/' + code)
+
         # login the user
         rv = self.app.post('/login', data=dict(
             username=self.user_dict()['username'],
             password=self.user_dict()['password']
             ))
+
         # check that user has edit button on his own profile
         rv = self.app.get('/' + self.user_dict()['username'])
         assert "Edit profile" in str(rv.data)
@@ -112,9 +119,18 @@ class UserTest(unittest.TestCase):
         user['email'] = "test@example.com"
         rv = self.app.post('/edit', data=user)
         assert "You will need to confirm the new email to complete this change" in str(rv.data)
-        user = User.objects.get(username=user['username'])
-        print(user.to_json())
-
+        
+        db_user = User.objects.first()
+        code = db_user.change_configuration.get('confirmation_code')
+        new_email = db_user.change_configuration.get('new_email')
+        assert new_email == user['email']
+        
+        # now confirm
+        rv = self.app.get('/confirm/' + db_user.username + '/' + code)
+        db_user = User.objects.filter().first()
+        assert db_user.email == user['email']
+        assert db_user.change_configuration == {}
+        
         # create a second user
         self.app.post('/register', data=self.user_dict())
         # login the user

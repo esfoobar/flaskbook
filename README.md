@@ -20,4 +20,4 @@
 ## If user changes emails
     - Need to set email_confirmed to False and send confirmation email
     - Write tests for it
-    
+        - Noticed a bug with checking the username on form! Add lower() to username and email in user.forms (32, 38) and users.views(92,99
