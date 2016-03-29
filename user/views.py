@@ -3,7 +3,7 @@ import bcrypt
 import uuid
 
 from user.models import User
-from user.forms import RegisterForm, LoginForm, EditForm, ForgotForm
+from user.forms import RegisterForm, LoginForm, EditForm, ForgotForm, PasswordResetForm
 from utilities.common import email
 
 user_app = Blueprint('user_app', __name__)
@@ -155,3 +155,11 @@ def forgot():
 
         message = "You will receive a password reset email if we find that email in our system"
     return render_template('user/forgot.html', form=form, error=error, message=message)
+    
+@user_app.route('/password_reset/<username>/<code>')
+@user_app.route('/password_reset', methods=('POST'))
+def password_reset(username, code):
+    error = None
+    message = None
+    form = PasswordResetForm()
+    return render_template('user/password_reset.html', form=form, error=error, message=message)
