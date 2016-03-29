@@ -23,7 +23,9 @@
       {{ form.hidden_tag() }}
 
       {{ render_field(form.username, class='form-control') }}
-      {{ render_field(form.password, class='form-control') }}
+      {{ render_field(form.password, **{"class": "form-control","aria-describedby": "passwordHelpBlock"}) }}
+      
+      <span id="passwordHelpBlock" class="help-block">Forgot password?</span>
 
       <button type="submit" class="btn btn-default">Login</button>
 
