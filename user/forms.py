@@ -50,3 +50,6 @@ class LoginForm(Form):
         
 class EditForm(BaseUserForm):
     pass
+
+class ForgotForm(Form):
+    email = EmailField('Email address', [validators.DataRequired(), validators.Email()])
