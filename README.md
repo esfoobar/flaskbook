@@ -1,8 +1,7 @@
-# Step 14
+# Step 15
     
-## Forgot password reset functionality
-    - Create a form for it
-    - Create a view to enter your email and email is sent
-    - Create a view to enter the new password
+## Reset password view
+    -> Create a form for it
+    - Create a view to enter your current password and two repeat passwords
     - Write a test for it
     
