@@ -175,7 +175,9 @@ def password_reset(username, code):
             user.password = hashed_password
             user.change_configuration = {}
             user.save()
-            session.pop('username')
+            # if user is logged in, log him out
+            if session.get('username'):
+                session.pop('username')
             return redirect(url_for('user_app.password_reset_complete'))
         
     return render_template('user/password_reset.html', 
