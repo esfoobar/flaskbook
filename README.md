@@ -1,17 +1,10 @@
-# Step 16
+# Step 17
     
-## Image uploading
-    - Picture thumbnail library
-        - `sudo apt-get install imagemagick libmagickcore-dev`
-        - `pip install wand` (from requirements.txt)
-        - Test the installation:
-```
-python manage.py shell
-from wand.image import Image
-with Image(filename='static/assets/flaskbook-logo-sm.png') as img:
-    print(img.size)
-```
-        - Add UPLOADED_IMAGES_DEST and IMAGE_URL to settings
-    - Modify user's model to take a picture using timestamp (explain the thinking)
-    - Modify edit profile to allow adding a picture
+## Image uploading to S3
+    - Set up the S3 bucket in AWS
+        - Mimic the same path of static
+        - Set the bucket to public read
+        - Make sure you add `AmazonS3FullAccess` as a policy to your user in IAM
+    - Modify the imaging library to use S3 if Debug=False
+    
     
