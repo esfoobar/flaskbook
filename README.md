@@ -11,9 +11,7 @@ from wand.image import Image
 with Image(filename='static/assets/flaskbook-logo-sm.png') as img:
     print(img.size)
 ```
-        - Add `UPLOADED_IMAGES_DEST = '/home/ubuntu/workspace/flaskbook/static/images'` to settings
+        - Add UPLOADED_IMAGES_DEST and IMAGE_URL to settings
     - Modify user's model to take a picture using timestamp (explain the thinking)
     - Modify edit profile to allow adding a picture
-
-    - Setup AWS S3
     
