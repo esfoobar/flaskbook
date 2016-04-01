@@ -4,7 +4,7 @@ import boto3
 from boto3.s3.transfer import S3Transfer
 
 from utilities.common import utc_now_ts as now
-from settings import UPLOAD_FOLDER, DEBUG, AWS_BUCKET
+from settings import UPLOAD_FOLDER, AWS_BUCKET
 
 def thumbnail_process(file, content_type, content_id, sizes=[("sm", 50), ("lg", 75), ("xlg", 200)]):
 
@@ -25,10 +25,9 @@ def thumbnail_process(file, content_type, content_id, sizes=[("sm", 50), ("lg", 
             img.format = 'png'
             img.save(filename=os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, name)))
 
-    if not DEBUG:
+    if AWS_BUCKET:
         s3 = boto3.client('s3')
         transfer = S3Transfer(s3)
-        import pdb; pdb.set_trace()
         transfer.upload_file(
             os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'raw')), 
             AWS_BUCKET, 
