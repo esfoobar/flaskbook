@@ -36,11 +36,14 @@ def thumbnail_process(file, content_type, content_id, sizes=[("sm", 50), ("lg", 
             )
         os.remove(os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'raw')))
 
-        # for (name, size) in sizes:
-        #     k.key = content_type + '/' + content_id + '.%s.%s.png' % (image_id, name)
-        #     k.set_contents_from_filename(filename_template % (image_id, name))
-        #     k.set_acl('public-read')
-        #     os.remove(filename_template % (image_id, name))
+        for (name, size) in sizes:
+            transfer.upload_file(
+                os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, name)), 
+                AWS_BUCKET, 
+                os.path.join(content_type, filename_template % (image_id, name)),
+                extra_args={'ACL': 'public-read', 'ContentType': 'image/png'}
+                )
+            os.remove(os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, name)))
 
     os.remove(file)
 

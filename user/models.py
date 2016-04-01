@@ -27,7 +27,7 @@ class User(db.Document):
         if AWS_BUCKET:
             return os.path.join(AWS_CONTENT_URL, AWS_BUCKET, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size))
         else:
-            return os.path.join(STATIC_IMAGE_URL, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size))
+            return url_for('static', filename=os.path.join(STATIC_IMAGE_URL, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size)))
 
     meta = {
         'indexes': ['username', 'email', '-created']
