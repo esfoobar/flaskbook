@@ -33,13 +33,22 @@
           {% else %}
           
             {% if rel == None %}
-            <button type="button" class="btn btn-primary">
-              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Add Friend
-            </button>          
+            <a href="{{ url_for('.edit') }}" role="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Friend
+            </a>  
+            <a href="{{ url_for('.edit') }}" role="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Block
+            </a>  
+            {% endif %}
+            
+            {% if rel == "BLOCKED" %}
+            <a href="{{ url_for('.edit') }}" role="button" id="relationship-none" class="btn btn-danger">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ABlocked
+            </a>
             {% endif %}
             
             {% if rel == "FRIENDS_APPROVED" %}
-            <a href="{{ url_for('.edit') }}" role="button" id="relationship" class="btn btn-success">
+            <a href="{{ url_for('.edit') }}" role="button" id="relationship-friends" class="btn btn-primary">
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <span id="relationship-label">Friends</span>
             </a>
             {% endif %}
@@ -125,7 +134,7 @@
 {% block end_body_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#relationship').mouseover(function() {
+  $('#relationship-friends').mouseover(function() {
     console.log('mousein');
     $(this).find('#relationship-label').text('Unfriend');
   }).mouseout(function(){

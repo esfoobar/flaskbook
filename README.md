@@ -1,7 +1,7 @@
 # Step 19
     
 ## Relationship frontend
-    - Create methods on user model to check if a user is a friend
+    - Create helper method on relationship model to check if a user is a friend or blocked
     - Test it:
 ```
 python manage.py shell
@@ -13,6 +13,5 @@ user2 = User.objects.get(username='javier')
 friends = Relationship(from_user=user1, to_user=user2, rel_type=Relationship.FRIENDS, status=Relationship.APPROVED).save()
 Relationship.get_relationship(user1,user2)
 ```
-    - Add rel object to user.views
-        - Move jquery to header
+    - Add relation button logic to user.views
 
