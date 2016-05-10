@@ -14,4 +14,5 @@ friends = Relationship(from_user=user1, to_user=user2, rel_type=Relationship.FRI
 Relationship.get_relationship(user1,user2)
 ```
     - Add rel object to user.views
+        - Move jquery to header
 
