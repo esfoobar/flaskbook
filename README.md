@@ -14,4 +14,11 @@ friends = Relationship(from_user=user1, to_user=user2, rel_type=Relationship.FRI
 Relationship.get_relationship(user1,user2)
 ```
     - Add relation button logic to user.views
-
+    - Test block/unblock frontend:
+```
+python manage.py shell
+from relationship.models import *
+rel = Relationship.objects.first()
+rel.rel_type=Relationship.BLOCKED
+rel.save()
+```

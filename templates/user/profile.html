@@ -42,8 +42,8 @@
             {% endif %}
             
             {% if rel == "BLOCKED" %}
-            <a href="{{ url_for('.edit') }}" role="button" id="relationship-none" class="btn btn-danger">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ABlocked
+            <a href="{{ url_for('.edit') }}" role="button" id="relationship-blocked" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span id="relationship-label">Blocked</span>
             </a>
             {% endif %}
             
@@ -135,10 +135,20 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $('#relationship-friends').mouseover(function() {
-    console.log('mousein');
     $(this).find('#relationship-label').text('Unfriend');
+    $(this).attr("class", "btn btn-default");
   }).mouseout(function(){
     $(this).find('#relationship-label').text('Friends');
+    $(this).attr("class", "btn btn-primary");
+  });            
+});
+$(document).ready(function(){
+  $('#relationship-blocked').mouseover(function() {
+    $(this).find('#relationship-label').text('Unblock');
+    $(this).attr("class", "btn btn-default");
+  }).mouseout(function(){
+    $(this).find('#relationship-label').text('Blocked');
+    $(this).attr("class", "btn btn-danger");
   });            
 });
 </script>
