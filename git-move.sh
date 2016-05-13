@@ -2,8 +2,8 @@
 
 # Convert steps(branches) to modules(tags) using a max # of steps
 
-max=1
-for i in `seq 20 $max`
+max=20
+for i in `seq 1 $max`
 do
     echo "Tagging step $i"
     git checkout step-${i}
