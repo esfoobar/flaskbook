@@ -9,7 +9,7 @@ do
     git checkout step-${i}
     git tag module-${i}
     git checkout master
-    git branch step-${i} -d
+    git branch step-${i} -D
     git push origin :step-${i}
 done
 git push origin --tags
