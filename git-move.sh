@@ -27,5 +27,8 @@ max=1
 for i in `seq 1 $max`
 do
     echo "Tagging step $i"
-    git tag step-${i} refs/heads/step-${i}
+    git checkout step-${i}
+    git tag module-${i}
+    git checkout master
+    git branch step-${i} -d
 done
