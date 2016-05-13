@@ -1,0 +1,8 @@
+flask
+flask-script
+flask-mongoengine
+flask-wtf
+py-bcrypt
+blinker
+boto3
+wand

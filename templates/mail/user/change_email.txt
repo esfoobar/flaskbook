@@ -1,0 +1,8 @@
+{% extends "mail/base.txt" %}
+
+{% block body %}
+We have received a request to change your email.
+
+To confirm this request, please click on this link:
+{{ config.HOSTNAME }}/confirm/{{ user.username }}/{{ user.change_configuration.confirmation_code }}
+{% endblock %}
