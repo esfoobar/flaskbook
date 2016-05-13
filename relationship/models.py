@@ -29,6 +29,7 @@ class Relationship(db.Document):
     req_date = db.IntField(db_field="rd", default=now())
     approved_date = db.IntField(db_field="ad", default=0)
 
+    @staticmethod
     def get_relationship(from_user, to_user):
         rel = Relationship.objects.filter(
             from_user=from_user, 

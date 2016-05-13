@@ -1,7 +1,7 @@
 # Step 19
     
 ## Relationship frontend
-    - Create helper method on relationship model to check if a user is a friend or blocked
+    - Create static method on relationship model to check if a user is a friend or blocked
     - Test it:
 ```
 python manage.py shell
