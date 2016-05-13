@@ -31,4 +31,5 @@ do
     git tag module-${i}
     git checkout master
     git branch step-${i} -d
+    git push origin :step-${i}
 done
