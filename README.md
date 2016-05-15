@@ -1,6 +1,7 @@
 # Step 20
     
 ## Relationship views
-    - Implement the login decoratorg
+    - Implement the login decorator
     - Create the relationship views routes
+    - Write tests
 
