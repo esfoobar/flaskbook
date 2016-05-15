@@ -9,7 +9,6 @@ relationship_app = Blueprint('relationship_app', __name__)
 @relationship_app.route('/add_friend/<to_username>', methods=('GET', 'POST'))
 @login_required
 def add_friend(to_username):
-    # import pdb; pdb.set_trace()
     logged_user = User.objects.filter(username=session.get('username')).first()
     to_user = User.objects.filter(username=to_username).first()
     if to_user:
