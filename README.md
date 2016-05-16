@@ -2,6 +2,5 @@
     
 ## Relationship views
     - Implement the login decorator
-    - Create the relationship views routes
-    - Write tests
+    - Create the relationship add friend basic functionality
 
