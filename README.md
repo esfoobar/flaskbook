@@ -1,6 +1,6 @@
-# Step 20
+# Step 21
     
-## Relationship views
-    - Implement the login decorator
-    - Create the relationship add friend basic functionality
+## Relationship friend further work
+    - Complete the template work for friendship status
+    - Do redirects with status message
 
