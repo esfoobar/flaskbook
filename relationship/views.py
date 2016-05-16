@@ -13,11 +13,30 @@ def add_friend(to_username):
     to_user = User.objects.filter(username=to_username).first()
     if to_user:
         rel = Relationship.get_relationship(logged_user, to_user)
+        print(rel)
         if rel == "FRIENDS_PENDING":
             return rel
         elif rel == "BLOCKED":
             return rel
+        elif rel == "FRIENDS_APPROVED":
+            return rel
+        elif rel == "REVERSE_FRIENDS_PENDING":
+            # Check if there's a pending invitation to_user -> from_user
+            # so then we confirm the friendship
+            Relationship(
+                from_user=logged_user, 
+                to_user=to_user,
+                rel_type=Relationship.FRIENDS,
+                status=Relationship.APPROVED
+                ).save()
+            reverse_rel = Relationship.objects.get(
+                from_user=to_user,
+                to_user=logged_user)
+            reverse_rel.status=Relationship.APPROVED
+            reverse_rel.save()
+            return "FRIENDS_APPROVED"
         elif rel == None:
+            # Otherwise, just do the initial request
             Relationship(
                 from_user=logged_user, 
                 to_user=to_user, 
@@ -26,6 +45,6 @@ def add_friend(to_username):
                 ).save()
             return "FRIENDSHIP_REQUESTED"
         else:
-            return to_user.username
+            return None
     else:
         abort(404)
