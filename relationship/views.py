@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, session
+from flask import Blueprint, abort, session, redirect, url_for
 
 from user.models import User
 from relationship.models import Relationship
@@ -13,14 +13,8 @@ def add_friend(to_username):
     to_user = User.objects.filter(username=to_username).first()
     if to_user:
         rel = Relationship.get_relationship(logged_user, to_user)
-        print(rel)
-        if rel == "FRIENDS_PENDING":
-            return rel
-        elif rel == "BLOCKED":
-            return rel
-        elif rel == "FRIENDS_APPROVED":
-            return rel
-        elif rel == "REVERSE_FRIENDS_PENDING":
+        to_username = to_user.username
+        if rel == "REVERSE_FRIENDS_PENDING":
             # Check if there's a pending invitation to_user -> from_user
             # so then we confirm the friendship
             Relationship(
@@ -34,7 +28,6 @@ def add_friend(to_username):
                 to_user=logged_user)
             reverse_rel.status=Relationship.APPROVED
             reverse_rel.save()
-            return "FRIENDS_APPROVED"
         elif rel == None:
             # Otherwise, just do the initial request
             Relationship(
@@ -43,8 +36,6 @@ def add_friend(to_username):
                 rel_type=Relationship.FRIENDS, 
                 status=Relationship.PENDING
                 ).save()
-            return "FRIENDSHIP_REQUESTED"
-        else:
-            return None
+        return redirect(url_for('user_app.profile', username=to_username))
     else:
         abort(404)

@@ -76,16 +76,22 @@ def logout():
     
 @user_app.route('/<username>', methods=('GET', 'POST'))
 def profile(username):
+    message = request.args.get('message', None)
     edit_profile = False
     rel = None
     user = User.objects.filter(username=username).first()
     if user:
         if session.get('username'):
-            logged_user = User.objects.filter(username=session.get('username')).first()
+            logged_user = User.objects.filter(
+                username=session.get('username')
+                ).first()
             rel = Relationship.get_relationship(logged_user, user)
+            print(rel)
         if session.get('username') and user.username == session.get('username'):
             edit_profile = True
-        return render_template('user/profile.html', user=user, rel=rel, edit_profile=edit_profile)
+        return render_template('user/profile.html', 
+            user=user, rel=rel, edit_profile=edit_profile, message=message
+            )
     else:
         abort(404)
 
