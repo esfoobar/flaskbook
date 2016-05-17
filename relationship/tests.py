@@ -4,6 +4,7 @@ import unittest
 from flask import session
 
 from user.models import User
+from relationship.models import Relationship
 
 class RelationshipTest(unittest.TestCase):
     def create_app(self):
@@ -63,7 +64,9 @@ class RelationshipTest(unittest.TestCase):
             follow_redirects=True)
         assert "relationship-friends-requested" in str(rv.data)
         
-        # TODO check only two records exist if I add a friend again
+        # check that only one records exists at this point
+        relcount = Relationship.objects.count()
+        assert relcount == 1
         
         # login the second user
         rv = self.app.post('/login', data=dict(
@@ -80,11 +83,18 @@ class RelationshipTest(unittest.TestCase):
             follow_redirects=True)
         assert "relationship-friends" in str(rv.data)
         
+        # check that two records exists at this point
+        relcount = Relationship.objects.count()
+        assert relcount == 2
         
         # user2 now unfriends user1
         rv = self.app.get('/remove_friend/' + self.user1_dict()['username'],
             follow_redirects=True)
         assert "relationship-add-friend" in str(rv.data)
+        
+        # check that no records exists at this point
+        relcount = Relationship.objects.count()
+        assert relcount == 0
         
         # login the first user
         rv = self.app.post('/login', data=dict(
@@ -126,8 +136,19 @@ class RelationshipTest(unittest.TestCase):
         rv = self.app.get(self.user1_dict()['username'])
         assert "relationship-reverse-blocked" in str(rv.data)
         
-        # TODO try to become friends with user1
+        # try to become friends with user1
+        rv = self.app.get('/add_friend/' + self.user1_dict()['username'],
+            follow_redirects=True)
+        assert "relationship-reverse-blocked" in str(rv.data)
+
+        # user1 unblocks user2
+        # login the first user
+        rv = self.app.post('/login', data=dict(
+            username=self.user1_dict()['username'],
+            password=self.user1_dict()['password']
+            ))
         
-        # TODO user1 unblocks user2
-        
-        #print(rv.data)
+        # user1 blocks the second user
+        rv = self.app.get('/unblock/' + self.user2_dict()['username'],
+            follow_redirects=True)
+        assert "relationship-add-friend" in str(rv.data)
