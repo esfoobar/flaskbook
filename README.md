@@ -1,6 +1,7 @@
-# Step 21
+# Step 22
     
-## Relationship friend further work
-    - Complete the template work for relationship status
-    - Do redirects
+## Relationship tests
+    - Print the relationship status on page for tests
+    - Minor change on profile edit (the check for image form wasn't working)
+    - Build tests
 

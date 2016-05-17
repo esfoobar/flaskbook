@@ -107,7 +107,7 @@ def edit():
 
             # check if image
             image_ts = None
-            if form.image:
+            if request.files.get('image'):
                 filename = secure_filename(form.image.data.filename)
                 file_path = os.path.join(UPLOAD_FOLDER, 'user', filename)
                 form.image.data.save(file_path)
