@@ -28,7 +28,7 @@ def add_friend(to_username):
                 to_user=logged_user)
             reverse_rel.status=Relationship.APPROVED
             reverse_rel.save()
-        elif rel == None:
+        elif rel == None and rel != "REVERSE_BLOCKED":
             # Otherwise, just do the initial request
             Relationship(
                 from_user=logged_user, 
@@ -78,6 +78,21 @@ def block(to_username):
             rel_type=Relationship.BLOCKED, 
             status=Relationship.APPROVED
             ).save()
+        return redirect(url_for('user_app.profile', username=to_username))
+    else:
+        abort(404)
+        
+@relationship_app.route('/unblock/<to_username>')
+@login_required
+def unblock(to_username):
+    logged_user = User.objects.filter(username=session.get('username')).first()
+    to_user = User.objects.filter(username=to_username).first()
+    if to_user:
+        rel = Relationship.get_relationship(logged_user, to_user)
+        if rel == "BLOCKED":
+            rel = Relationship.objects.filter(
+                from_user=logged_user,
+                to_user=to_user).delete()
         return redirect(url_for('user_app.profile', username=to_username))
     else:
         abort(404)

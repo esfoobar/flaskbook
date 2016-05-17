@@ -86,7 +86,6 @@ def profile(username):
                 username=session.get('username')
                 ).first()
             rel = Relationship.get_relationship(logged_user, user)
-            print(rel)
         if session.get('username') and user.username == session.get('username'):
             edit_profile = True
         return render_template('user/profile.html', 

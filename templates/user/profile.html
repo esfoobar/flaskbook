@@ -42,7 +42,7 @@
             {% endif %}
             
             {% if rel == "BLOCKED" %}
-            <a href="{{ url_for('.edit') }}" role="button" id="relationship-blocked" class="btn btn-danger">
+            <a href="{{ url_for('relationship_app.unblock', to_username=user.username) }}" role="button" id="relationship-blocked" class="btn btn-danger">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span id="relationship-label">Blocked</span>
             </a>
             {% endif %}
