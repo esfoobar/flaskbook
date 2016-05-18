@@ -24,10 +24,14 @@ class User(db.Document):
         document.email = document.email.lower()
         
     def profile_imgsrc(self, size):
-        if AWS_BUCKET:
-            return os.path.join(AWS_CONTENT_URL, AWS_BUCKET, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size))
+        print(self.profile_image)
+        if self.profile_image:
+            if AWS_BUCKET:
+                return os.path.join(AWS_CONTENT_URL, AWS_BUCKET, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size))
+            else:
+                return url_for('static', filename=os.path.join(STATIC_IMAGE_URL, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size)))
         else:
-            return url_for('static', filename=os.path.join(STATIC_IMAGE_URL, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size)))
+            return url_for('static', filename=os.path.join(STATIC_IMAGE_URL, 'user', 'no-profile.%s.png' % (size)))
 
     meta = {
         'indexes': ['username', 'email', '-created']

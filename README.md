@@ -1,7 +1,8 @@
-# Step 22
+# Step 23
     
-## Relationship tests
-    - Minor change on profile edit (the check for image form wasn't passing tests)
-    - Build tests
-    - Add empty ahref for reverse_block
+## Profile page enhancements
+    - Display the profile image of the user
+        - Add a method on the model if no image
+    - Display the first five friends on the sidebar
+    - Display an all friends paginated page where you can follow users
 

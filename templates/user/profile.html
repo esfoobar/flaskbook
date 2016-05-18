@@ -12,7 +12,7 @@
 
   <div class="col-md-3">
 
-    <img class="img-thumbnail" src="//placehold.it/200x200" width="200" heigh="200" alt="{{ user.username }}">
+    <img class="img-thumbnail" src="{{ user.profile_imgsrc('xlg') }}" width="200" heigh="200" alt="{{ user.username }}">
 
     <h3>{{ user.first_name }} {{ user.last_name }} </h3>
     <h4><a href="{{ url_for('user_app.profile', username=user.username) }}" />@{{ user.username }}</a></h4>
