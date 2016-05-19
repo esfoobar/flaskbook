@@ -76,7 +76,6 @@ def logout():
     
 @user_app.route('/<username>', methods=('GET', 'POST'))
 def profile(username):
-    message = request.args.get('message', None)
     edit_profile = False
     rel = None
     user = User.objects.filter(username=username).first()
@@ -88,8 +87,20 @@ def profile(username):
             rel = Relationship.get_relationship(logged_user, user)
         if session.get('username') and user.username == session.get('username'):
             edit_profile = True
+        # get friends
+        friends = Relationship.objects.filter(
+            from_user=user,
+            rel_type=Relationship.FRIENDS,
+            status=Relationship.APPROVED
+            )
+        friends_total = friends.count()
+        friends = friends[:5]
         return render_template('user/profile.html', 
-            user=user, rel=rel, edit_profile=edit_profile, message=message
+            user=user, 
+            rel=rel, 
+            edit_profile=edit_profile, 
+            friends=friends,
+            friends_total=friends_total
             )
     else:
         abort(404)

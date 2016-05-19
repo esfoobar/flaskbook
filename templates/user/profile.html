@@ -12,7 +12,7 @@
 
   <div class="col-md-3">
 
-    <img class="img-thumbnail" src="{{ user.profile_imgsrc('xlg') }}" width="200" heigh="200" alt="{{ user.username }}">
+    <img class="img-thumbnail" src="{{ user.profile_imgsrc('xlg') }}" width="200" height="200" alt="{{ user.username }}">
 
     <h3>{{ user.first_name }} {{ user.last_name }} </h3>
     <h4><a href="{{ url_for('user_app.profile', username=user.username) }}" />@{{ user.username }}</a></h4>
@@ -114,33 +114,22 @@
     
       <div class="col-md-3">
 
-        <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Friends <span class="badge">4</span></h4>
+        <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Friends <span class="badge">{{ friends_total }}</span></h4>
         
+        {% for friend in friends %}
         <div class="media">
           <div class="media-left">
-            <a href="#">
-              <img class="media-object" src="//placehold.it/50x50" width="50" heigh="50" alt="{{ user.username }}">
+            <a class="img-thumbnail" href="{{ url_for('.profile', username=friend.to_user.username) }}">
+              <img src="{{ friend.to_user.profile_imgsrc('sm') }}" width="50" alt="{{ friend.to_user.username }}">
             </a>
           </div>
           <div class="media-body">
-            <p>Luis Escobar<br />
-              <a href="#">@luis</a>
+            <p>{{ friend.to_user.first_name }}<br />
+              <a href="{{ url_for('.profile', username=friend.to_user.username) }}">@{{ friend.to_user.username }}</a>
             </p>
           </div>
         </div> <!-- media -->
-
-        <div class="media">
-          <div class="media-left">
-            <a href="#">
-              <img class="media-object" src="//placehold.it/50x50" width="50" heigh="50" alt="{{ user.username }}">
-            </a>
-          </div>
-          <div class="media-body">
-            <p>Luis Escobar<br />
-              <a href="#">@luis</a>
-            </p>
-          </div>
-        </div> <!-- media -->
+        {% endfor %}
 
       </div> <!-- col-md-3 -->
       
