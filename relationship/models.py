@@ -28,9 +28,17 @@ class Relationship(db.Document):
     status = db.IntField(db_field="s", choices=STATUS_TYPE)
     req_date = db.IntField(db_field="rd", default=now())
     approved_date = db.IntField(db_field="ad", default=0)
+    
+    def is_friend(self, user):
+        if user:
+            return self.get_relationship(self.to_user, user)
+        else:
+            return None
 
     @staticmethod
     def get_relationship(from_user, to_user):
+        if from_user == to_user:
+            return 'SAME'
         rel = Relationship.objects.filter(
             from_user=from_user, 
             to_user=to_user

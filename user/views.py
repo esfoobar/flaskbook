@@ -69,16 +69,21 @@ def register():
         return "User registered"
     return render_template('user/register.html', form=form)
     
-@user_app.route('/logout', methods=('GET', 'POST'))
+@user_app.route('/logout')
 def logout():
     session.pop('username')
     return redirect(url_for('user_app.login'))
-    
-@user_app.route('/<username>', methods=('GET', 'POST'))
-def profile(username):
+
+@user_app.route('/<username>/friends/<int:page>')
+@user_app.route('/<username>/friends', endpoint='profile-friends')
+@user_app.route('/<username>')
+def profile(username, page=1):
+    logged_user = None
     edit_profile = False
     rel = None
+    friends_page = False
     user = User.objects.filter(username=username).first()
+    
     if user:
         if session.get('username'):
             logged_user = User.objects.filter(
@@ -87,6 +92,7 @@ def profile(username):
             rel = Relationship.get_relationship(logged_user, user)
         if session.get('username') and user.username == session.get('username'):
             edit_profile = True
+        
         # get friends
         friends = Relationship.objects.filter(
             from_user=user,
@@ -94,13 +100,21 @@ def profile(username):
             status=Relationship.APPROVED
             )
         friends_total = friends.count()
-        friends = friends[:5]
+        
+        if 'friends' in request.url:
+            friends_page = True
+            friends = friends.paginate(page=page, per_page=3)
+        else:
+            friends = friends[:5]
+        
         return render_template('user/profile.html', 
             user=user, 
+            logged_user=logged_user,
             rel=rel, 
             edit_profile=edit_profile, 
             friends=friends,
-            friends_total=friends_total
+            friends_total=friends_total,
+            friends_page=friends_page
             )
     else:
         abort(404)

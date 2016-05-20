@@ -24,7 +24,6 @@ class User(db.Document):
         document.email = document.email.lower()
         
     def profile_imgsrc(self, size):
-        print(self.profile_image)
         if self.profile_image:
             if AWS_BUCKET:
                 return os.path.join(AWS_CONTENT_URL, AWS_BUCKET, 'user', '%s.%s.%s.png' % (self.id, self.profile_image, size))
