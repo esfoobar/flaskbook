@@ -79,7 +79,6 @@ def logout():
 @user_app.route('/<username>')
 def profile(username, page=1):
     logged_user = None
-    edit_profile = False
     rel = None
     friends_page = False
     user = User.objects.filter(username=username).first()
@@ -90,8 +89,6 @@ def profile(username, page=1):
                 username=session.get('username')
                 ).first()
             rel = Relationship.get_relationship(logged_user, user)
-        if session.get('username') and user.username == session.get('username'):
-            edit_profile = True
         
         # get friends
         friends = Relationship.objects.filter(
@@ -103,15 +100,14 @@ def profile(username, page=1):
         
         if 'friends' in request.url:
             friends_page = True
-            friends = friends.paginate(page=page, per_page=3)
+            friends = friends.paginate(page=page, per_page=8)
         else:
             friends = friends[:5]
         
         return render_template('user/profile.html', 
             user=user, 
             logged_user=logged_user,
-            rel=rel, 
-            edit_profile=edit_profile, 
+            rel=rel,
             friends=friends,
             friends_total=friends_total,
             friends_page=friends_page
