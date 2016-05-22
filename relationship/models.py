@@ -31,7 +31,7 @@ class Relationship(db.Document):
     
     def is_friend(self, user):
         if user:
-            return self.get_relationship(self.to_user, user)
+            return self.get_relationship(user, self.to_user)
         else:
             return None
 
