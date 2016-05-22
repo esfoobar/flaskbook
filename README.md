@@ -1,6 +1,5 @@
-# Step 24
+# Step 25
     
-## Reusable follow button
-    - Refactor the follow button on user's main profile as a macro
-    - Send rel requests back to referer
+## Send rel email
+    - Send email to user when friendship is requested
 
