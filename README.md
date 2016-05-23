@@ -1,6 +1,5 @@
-# Step 25
+# Step 26
     
-## Finish friends
-    - Add previous next buttons
-    - Send email when user requests friendship
+## Start Feed Module
+    - Feed Blueprint
 
