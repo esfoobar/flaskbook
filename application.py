@@ -18,9 +18,11 @@ def create_app(**config_overrides):
     # import blueprints
     from user.views import user_app
     from relationship.views import relationship_app
+    from feed.views import feed_app
 
     # register blueprints
     app.register_blueprint(user_app)
     app.register_blueprint(relationship_app)
+    app.register_blueprint(feed_app)
 
     return app
