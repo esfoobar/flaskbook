@@ -1,5 +1,6 @@
 # Step 25
     
-## Send rel email
-    - Send email to user when friendship is requested
+## Finish friends
+    - Add previous next buttons
+    - Send email when user requests friendship
 
