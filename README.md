@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/jorge-3/flaskbook/master.svg?maxAge=2592000)](https://travis-ci.com/jorge-3/flaskbook)
+[![Build Status](https://travis-ci.com/jorge-3/flaskbook.svg?token=CpgTPHGMFe4PoRnkeQqo&branch=master)](https://travis-ci.com/jorge-3/flaskbook)
 
 # Step 26
     
