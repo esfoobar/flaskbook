@@ -44,8 +44,10 @@ def add_friend(to_username):
             body_html = render_template('mail/relationship/added_friend.html', from_user=logged_user, to_user=to_user)
             body_text = render_template('mail/relationship/added_friend.txt', from_user=logged_user, to_user=to_user)
             email(to_user.email, ("%s has requested to be friends") % logged_user.first_name, body_html, body_text)
-
-        return redirect(ref)
+        if ref:
+            return redirect(ref)
+        else:
+            return redirect(url_for('user_app.profile', username=to_user.username))
     else:
         abort(404)
         
@@ -64,7 +66,10 @@ def remove_friend(to_username):
             reverse_rel = Relationship.objects.filter(
                 from_user=to_user,
                 to_user=logged_user).delete()
-        return redirect(ref)
+        if ref:
+            return redirect(ref)
+        else:
+            return redirect(url_for('user_app.profile', username=to_user.username))
     else:
         abort(404)
         
@@ -89,7 +94,10 @@ def block(to_username):
             rel_type=Relationship.BLOCKED, 
             status=Relationship.APPROVED
             ).save()
-        return redirect(ref)
+        if ref:
+            return redirect(ref)
+        else:
+            return redirect(url_for('user_app.profile', username=to_user.username))
     else:
         abort(404)
         
@@ -105,6 +113,9 @@ def unblock(to_username):
             rel = Relationship.objects.filter(
                 from_user=logged_user,
                 to_user=to_user).delete()
-        return redirect(ref)
+        if ref:
+            return redirect(ref)
+        else:
+            return redirect(url_for('user_app.profile', username=to_user.username))
     else:
         abort(404)
