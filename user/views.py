@@ -11,6 +11,7 @@ from settings import UPLOAD_FOLDER
 from utilities.imaging import thumbnail_process
 from relationship.models import Relationship
 from user.decorators import login_required
+from feed.forms import FeedPostForm
 
 user_app = Blueprint('user_app', __name__)
 
@@ -103,6 +104,8 @@ def profile(username, page=1):
             friends = friends.paginate(page=page, per_page=8)
         else:
             friends = friends[:5]
+            
+        form = FeedPostForm()
         
         return render_template('user/profile.html', 
             user=user, 
@@ -110,7 +113,8 @@ def profile(username, page=1):
             rel=rel,
             friends=friends,
             friends_total=friends_total,
-            friends_page=friends_page
+            friends_page=friends_page,
+            form=form
             )
     else:
         abort(404)

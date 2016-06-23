@@ -37,6 +37,27 @@
       {% if not friends_page %}
       
       <div class="col-md-9"> <!-- == Posts == -->
+      
+        <!-- post text input -->
+        <div class="row feed-message">
+          {% if error %}
+          <div class="alert alert-danger" role="alert">{{ error }}</div>
+          {% endif %}
+      
+          {% from "_formhelpers.html" import render_field %}
+          <form method="POST" action="{{ url_for('feed_app.add_message')}}" role="form">
+      
+            {{ form.hidden_tag() }}
+      
+            <div class="form-group">
+            {{ form.post(class='form-control', rows=3) }}
+            </div>
+      
+            <button type="submit" class="btn btn-default pull-right">Post</button>
+      
+          </form>
+        </div>
+        <!-- post text input -->
         
         <div class="media">
           <div class="media-left">
