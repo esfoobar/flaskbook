@@ -4,4 +4,5 @@
     
 ## Feed Rendering and Distribution
     - Render messages on own profile first
+    - Create a millisecond function -- existing timestamp is not as accurate
     - Work on feed process

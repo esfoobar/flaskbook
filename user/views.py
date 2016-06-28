@@ -12,6 +12,7 @@ from utilities.imaging import thumbnail_process
 from relationship.models import Relationship
 from user.decorators import login_required
 from feed.forms import FeedPostForm
+from feed.models import Message
 
 user_app = Blueprint('user_app', __name__)
 
@@ -75,7 +76,7 @@ def logout():
     session.pop('username')
     return redirect(url_for('user_app.login'))
 
-@user_app.route('/<username>/friends/<int:page>', endpoint='profile-friends-page')
+@user_app.route('/<username>/friends/<int:friends_page>', endpoint='profile-friends-page')
 @user_app.route('/<username>/friends', endpoint='profile-friends')
 @user_app.route('/<username>')
 def profile(username, page=1):
@@ -101,11 +102,16 @@ def profile(username, page=1):
         
         if 'friends' in request.url:
             friends_page = True
-            friends = friends.paginate(page=page, per_page=8)
+            friends = friends.paginate(page=friends_page, per_page=8)
         else:
             friends = friends[:5]
             
         form = FeedPostForm()
+        
+        # get user messages
+        profile_messages = Message.objects.filter(
+            from_user=user
+            ).order_by('-create_date')[:10]
         
         return render_template('user/profile.html', 
             user=user, 
@@ -114,7 +120,8 @@ def profile(username, page=1):
             friends=friends,
             friends_total=friends_total,
             friends_page=friends_page,
-            form=form
+            form=form,
+            profile_messages=profile_messages
             )
     else:
         abort(404)
