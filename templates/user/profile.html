@@ -38,6 +38,7 @@
       
       <div class="col-md-9"> <!-- == Posts == -->
       
+        {% if logged_user %}      
         <!-- post text input -->
         <div class="row feed-message">
           {% if error %}
@@ -54,12 +55,12 @@
             </div>
             
             <input type="hidden" name="to_user" value="{{ user.username }}" />
-      
             <button type="submit" class="btn btn-primary pull-right">Post</button>
       
           </form>
         </div>
         <!-- post text input -->
+        {% endif %}
         
         <div class="media">
           <div class="media-left">

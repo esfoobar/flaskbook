@@ -14,5 +14,6 @@
             - we won't see comments by users we have blocked, but will see comments by people we're not friends with
     - Add the text input on the user's homepage
     - Read the values in the message add
+    - Create a process.py for logic of post dissemination (and in the future we will do async here)
     
 * Twitter [uses a version of this model](http://highscalability.com/blog/2013/7/8/the-architecture-twitter-uses-to-deal-with-150m-active-users.html)
