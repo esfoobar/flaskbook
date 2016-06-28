@@ -29,12 +29,12 @@ def add_message():
             
         # store on same user's feed
         feed = Feed(
-            to_user=to_user,
+            user=from_user,
             message=message
             ).save()
             
         # process the message
-        
+        process_message(message)
         
         if ref:
             return redirect(ref)

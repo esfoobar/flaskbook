@@ -18,11 +18,11 @@ class Message(db.Document):
     }
     
 class Feed(db.Document):
-    to_user = db.ReferenceField(User, db_field="tu", reverse_delete_rule=CASCADE)
+    user = db.ReferenceField(User, db_field="u", reverse_delete_rule=CASCADE)
     message = db.ReferenceField(Message, db_field="m", reverse_delete_rule=CASCADE)
     parent = db.ObjectIdField(db_field="p", default=None)
     create_date = db.IntField(db_field="c", default=now())
     
     meta = {
-        'indexes': [('to_user', 'parent', '-create_date')]
+        'indexes': [('user', 'parent', '-create_date')]
     }
