@@ -1,6 +1,8 @@
 import time
 import boto3
 from flask import current_app
+import datetime
+import arrow
 
 def utc_now_ts():
     return int(time.time())
@@ -8,6 +10,10 @@ def utc_now_ts():
 def utc_now_ts_ms():
     return lambda: int(round(time.time() * 1000))
     
+def ms_stamp_humanize(ts):
+    ts = datetime.datetime.fromtimestamp(ts/1000.0)
+    return arrow.get(ts).humanize()
+
 def email(to_email, subject, body_html, body_text):
     # don't run this if we're running a test
     if current_app.config.get('TESTING'):

@@ -38,7 +38,7 @@
       
       <div class="col-md-9"> <!-- == Posts == -->
       
-        {% if logged_user %}      
+        {% if logged_user and rel == "FRIENDS_APPROVED" %}      
         <!-- post text input -->
         <div class="row feed-message">
           {% if error %}
@@ -70,7 +70,12 @@
             </a>
           </div>
           <div class="media-body">
-            <div class="media-user">{{ message.from_user.first_name }} {{ message.from_user.last_name }} <a href="{{ url_for('.profile', username=message.from_user.username) }}">@{{ message.from_user.username }}</a></div>
+            <div class="media-user-pane">
+              <span class="media-user"><a href="{{ url_for('.profile', username=message.from_user.username) }}">{{ message.from_user.first_name }} {{ message.from_user.last_name }}</a></span>
+              {% if message.to_user %}
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="media-user"><a href="{{ url_for('.profile', username=message.to_user.username) }}">{{ message.to_user.first_name }} {{ message.to_user.last_name }}</a></span>
+              {% endif %}
+            </div>
             <div class="media-text">{{ message.text }}</div>
             </p>
           </div>
