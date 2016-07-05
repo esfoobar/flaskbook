@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
+from utilities.common import linkify, ms_stamp_humanize
 
 db = MongoEngine()
 
@@ -24,5 +25,10 @@ def create_app(**config_overrides):
     app.register_blueprint(user_app)
     app.register_blueprint(relationship_app)
     app.register_blueprint(feed_app)
-
+    
+    app.context_processor(utility_processor)
+    
     return app
+    
+def utility_processor():
+  return dict(linkify=linkify, humanize=ms_stamp_humanize)
