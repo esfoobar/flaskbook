@@ -3,6 +3,7 @@ import bcrypt
 import uuid
 import os
 from werkzeug import secure_filename
+from mongoengine import Q
 
 from user.models import User
 from user.forms import RegisterForm, LoginForm, EditForm, ForgotForm, PasswordResetForm
@@ -36,7 +37,7 @@ def login():
                     session.pop('next')
                     return redirect(next)
                 else:
-                    return "User logged in"
+                    return redirect(url_for('home_app.home'))
             else:
                 user = None
         if not user:
@@ -110,7 +111,7 @@ def profile(username, page=1):
         
         # get user messages
         profile_messages = Message.objects.filter(
-            from_user=user
+            Q(from_user=user) | Q(to_user=user)
             ).order_by('-create_date')[:10]
         
         return render_template('user/profile.html', 

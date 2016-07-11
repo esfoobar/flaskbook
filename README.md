@@ -7,3 +7,6 @@
     - Create a millisecond function -- existing timestamp is not as accurate
     - Allow posting a message to someone else only if friends
     - Use Arrow for the timestamp, bleach for urlize and stripping out HTML tags
+    - Tried macro'izing the feed message, but the linkify context doesn't seem to be available
+    - Finish process.py
+    - Create home page app

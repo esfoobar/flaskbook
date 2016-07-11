@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+{% from "user/_rel_button.html" import rel_button, rel_js %}
+
+{% block title %}{{ user.username }} - Profile{% endblock %} 
+
+{% block header %}<link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">{% endblock %}
+
+{% block content %} 
+
+{% include "navbar.html" %}
+
+<div class="row">
+
+  <div class="col-md-3">
+
+  </div> <!-- col-md-3 -->
+  
+  <div class="col-md-9">
+    
+    <div class="row">
+      
+      <div class="col-md-9"> <!-- == Posts == -->
+      
+        <!-- post text input -->
+        <div class="row feed-message">
+          {% if error %}
+          <div class="alert alert-danger" role="alert">{{ error }}</div>
+          {% endif %}
+      
+          {% from "_formhelpers.html" import render_field %}
+          <form method="POST" action="{{ url_for('feed_app.add_message')}}" role="form">
+      
+            {{ form.hidden_tag() }}
+      
+            <div class="form-group">
+              {{ form.post(class='form-control', rows=3) }}
+            </div>
+            
+            <input type="hidden" name="to_user" value="{{ user.username }}" />
+            <button type="submit" class="btn btn-primary pull-right">Post</button>
+      
+          </form>
+        </div>
+        <!-- post text input -->
+        
+        {% for fm in feed_messages %}
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" src="{{ fm.message.from_user.profile_imgsrc('sm') }}" width="50" height="50" alt="{{ fm.message.from_user.username }}">
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="media-user-pane">
+              <span class="media-user"><a href="{{ url_for('user_app.profile', username=fm.message.from_user.username) }}">{{ fm.message.from_user.first_name }} {{ fm.message.from_user.last_name }}</a></span>
+              {% if fm.message.to_user %}
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="media-user"><a href="{{ url_for('user_app.profile', username=fm.message.to_user.username) }}">{{ fm.message.to_user.first_name }} {{ fm.message.to_user.last_name }}</a></span>
+              {% endif %}
+            </div>
+            <div class="media-text">{{ linkify(fm.message.text)|safe }}</div>
+            <div class="media-footer">{{ humanize(fm.message.create_date) }}</div>
+          </div>
+        </div> <!-- media -->
+        {% endfor %}
+        
+        </div> <!-- row -->
+        
+      </div> <!-- col-md-9 -->
+    
+      <div class="col-md-3"> 
+      
+      </div> <!-- col-md-3 -->
+    
+  </div> <!-- col-md-9 -->
+
+</div> <!-- row -->
+{% endblock %}
