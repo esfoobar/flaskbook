@@ -6,7 +6,7 @@
     - Render messages on own profile first
     - Create a millisecond function -- existing timestamp is not as accurate
     - Allow posting a message to someone else only if friends
-    - Use Arrow for the timestamp, bleach for urlize and stripping out HTML tags
     - Macro'ize the feed message
+    - Use Arrow for the timestamp, bleach for urlize and stripping out HTML tags
     - Finish process.py
     - Create home page app
