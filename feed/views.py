@@ -9,6 +9,7 @@ from feed.process import process_message
 from feed.forms import FeedPostForm
 from settings import UPLOAD_FOLDER
 from utilities.imaging import image_height_transform
+from utilities.common import utc_now_ts_ms as now
 
 feed_app = Blueprint('feed_app', __name__)
 
@@ -17,11 +18,12 @@ feed_app = Blueprint('feed_app', __name__)
 def add_message():
     ref = request.referrer
     form = FeedPostForm()
+    
     if form.validate_on_submit():
         # process images
+        post_images = []
         uploaded_files = request.files.getlist('images')
-        if uploaded_files:
-            post_images = []
+        if uploaded_files[0].filename != '':
             for file in uploaded_files:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(UPLOAD_FOLDER, 'posts', filename)
@@ -55,9 +57,8 @@ def add_message():
             images = []
             for file_path in post_images:
                 (image_ts, width) = image_height_transform(file_path, 'posts', str(message.id))
-                images.append({"ts": image_ts, "w": width})
+                images.append({"ts": str(image_ts), "w": str(width)})
             message.images = images
-            print(message.id)
             message.save()
             
         # process the message

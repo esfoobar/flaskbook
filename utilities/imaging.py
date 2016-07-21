@@ -3,11 +3,10 @@ import os
 import boto3
 from boto3.s3.transfer import S3Transfer
 
-from utilities.common import utc_now_ts as now
+from utilities.common import utc_now_ts as now, utc_now_ts_ms as now_ms
 from settings import UPLOAD_FOLDER, AWS_BUCKET
 
 def thumbnail_process(file, content_type, content_id, sizes=[("sm", 50), ("lg", 75), ("xlg", 200)]):
-
     image_id = now()
     filename_template = content_id + '.%s.%s.png'
 
@@ -60,8 +59,8 @@ def crop_center(image):
     )
     
 def image_height_transform(file, content_type, content_id, height=200):
-    image_id = now()
-    filename_template = content_id + '%s.%s.png'
+    image_id = now_ms()()
+    filename_template = content_id + '.%s.%s.png'
 
     # original
     with Image(filename=file) as img:

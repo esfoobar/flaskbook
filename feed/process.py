@@ -1,5 +1,6 @@
 from feed.models import Message, Feed
 from relationship.models import Relationship
+from utilities.common import utc_now_ts_ms as now
 
 def process_message(message):
     

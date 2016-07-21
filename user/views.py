@@ -137,7 +137,6 @@ def edit():
         form = EditForm(obj=user)
 
         if form.validate_on_submit():
-
             # check if image
             image_ts = None
             if request.files.get('image'):
