@@ -12,7 +12,7 @@ class Message(db.Document):
     live = db.BooleanField(db_field="l", default=True)
     create_date = db.LongField(db_field="c", default=now())
     parent = db.ObjectIdField(db_field="p", default=None)
-    image = db.StringField(db_field="i", default=None)
+    images = db.ListField(db_field="ii")
     
     @property
     def text_linkified(self):
