@@ -74,6 +74,25 @@ def image_height_transform(file, content_type, content_id, height=200):
         img.format = 'png'
         img.save(filename=os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'xlg')))
         img_width = img.width
+        
+    if AWS_BUCKET:
+        s3 = boto3.client('s3')
+        transfer = S3Transfer(s3)
+        transfer.upload_file(
+            os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'raw')), 
+            AWS_BUCKET, 
+            os.path.join(content_type, filename_template % (image_id, 'raw')),
+            extra_args={'ACL': 'public-read', 'ContentType': 'image/png'}
+            )
+        os.remove(os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'raw')))
+
+        transfer.upload_file(
+            os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'xlg')), 
+            AWS_BUCKET, 
+            os.path.join(content_type, filename_template % (image_id, 'xlg')),
+            extra_args={'ACL': 'public-read', 'ContentType': 'image/png'}
+            )
+        os.remove(os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'xlg')))
 
     os.remove(file)
 
