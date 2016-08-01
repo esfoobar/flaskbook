@@ -76,8 +76,6 @@ def add_message():
 @feed_app.route('/message/<message_id>', methods=('GET', 'POST'))
 def message(message_id, feed_id=None):
     form = FeedPostForm()
-    
-    feed = None
     message = None
 
     message = Message.objects.filter(id=message_id).first()
@@ -102,6 +100,5 @@ def message(message_id, feed_id=None):
             
     return render_template('feed/message.html', 
         message=message,
-        feed=feed,
         form=form
         )
