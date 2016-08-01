@@ -15,3 +15,4 @@
 ## Comment cleanup
 - Add the comment hyperlink to anchor on comment form
 - Clear the comment text bug
+- Add comment count

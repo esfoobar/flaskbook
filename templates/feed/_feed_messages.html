@@ -22,8 +22,9 @@
     {% endif %}
     <div class="media-footer">
       <a href="{{ url_for('feed_app.message', message_id=message.id) }}" class="media-timestamp">{{ message.human_timestamp }}</a> - 
-      <a href="{{ url_for('feed_app.message', message_id=message.id) }}#comment-form">Comment</a> - 
-      <a href="{{ url_for('feed_app.like_message', message_id=message.id) }}">Like</a>
+      <a href="{{ url_for('feed_app.message', message_id=message.id) }}#comment-form">Comment</a>
+      {% if message.comments %}({{ message.comments.count() }}){% endif %}
+       - <a href="{{ url_for('feed_app.like_message', message_id=message.id) }}">Like</a>
       {% if message.likes %}
       <div class="media-footer-likes">
           <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
