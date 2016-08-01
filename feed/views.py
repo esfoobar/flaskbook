@@ -23,7 +23,7 @@ def add_message():
         # process images
         post_images = []
         uploaded_files = request.files.getlist('images')
-        if uploaded_files[0].filename != '':
+        if uploaded_files and uploaded_files[0].filename != '':
             for file in uploaded_files:
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(UPLOAD_FOLDER, 'posts', filename)

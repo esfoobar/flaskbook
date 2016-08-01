@@ -1,9 +1,15 @@
 [![Build Status](https://travis-ci.com/jorge-3/flaskbook.svg?token=CpgTPHGMFe4PoRnkeQqo&branch=master)](https://travis-ci.com/jorge-3/flaskbook)
 
-# Step 29
+# Step 30
 
-## Adding comments to posts
-- Create a message models type with post, comment, like
-- Create a message view and template
-- Add comments to messages
+## Getting user's messages only if friends
+- Modify user/views/profile to grab POSTs (not COMMENTS or LIKES)
+- Check if friends to display posts
+- Fix issue with posting on user's profile
 
+## Adding likes to posts
+- 
+
+## Comment cleanup
+- Add the comment hyperlink to anchor on message
+- Clear the comment text bug
