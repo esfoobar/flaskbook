@@ -55,12 +55,7 @@ class Feed(db.Document):
     message = db.ReferenceField(Message, db_field="m", reverse_delete_rule=CASCADE)
     parent = db.ObjectIdField(db_field="p", default=None)
     create_date = db.LongField(db_field="c", default=now())
-    message_type = db.IntField(db_field="mt", default=POST, choices=MESSAGE_TYPE)
-
-    @property
-    def comments(self, user):
-        return Message.objects.filter(parent=self.id).order_by('-created')
 
     meta = {
-        'indexes': [('user', 'message_type', '-create_date')]
+        'indexes': [('user', '-create_date')]
     }

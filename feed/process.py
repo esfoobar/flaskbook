@@ -19,9 +19,7 @@ def process_message(message):
         # post on all of friends feeds the message
         feed = Feed(
             user=friend.to_user,
-            message=message,
-            message_type=message.message_type,
-            parent=message.parent
+            message=message
         ).save()
     
     return True

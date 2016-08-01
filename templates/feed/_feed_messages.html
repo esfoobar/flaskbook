@@ -1,4 +1,4 @@
-{% macro render_feed_message(message, feed_id=None) %}
+{% macro render_feed_message(message) %}
 <div class="media">
   <div class="media-left">
     <a href="{{ url_for('user_app.profile', username=message.from_user.username) }}">

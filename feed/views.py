@@ -4,7 +4,7 @@ import os
 
 from user.decorators import login_required
 from user.models import User
-from feed.models import Message, Feed, COMMENT
+from feed.models import Message, Feed, POST, COMMENT
 from feed.process import process_message
 from feed.forms import FeedPostForm
 from settings import UPLOAD_FOLDER
@@ -43,7 +43,8 @@ def add_message():
         message = Message(
             from_user=from_user,
             to_user=to_user,
-            text=post
+            text=post,
+            message_type=POST,
             ).save()
             
         # store on same user's feed

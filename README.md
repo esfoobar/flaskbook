@@ -3,6 +3,7 @@
 # Step 29
 
 ## Adding comments to posts
+- Create a message type with post, comment, like
 - Create a message view and template
 
 ## Making profiles private and show only feed messages

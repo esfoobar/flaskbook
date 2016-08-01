@@ -45,7 +45,7 @@
 
         {% from "feed/_feed_messages.html" import render_feed_message %}
         {% for fm in feed_messages %}
-          {{ render_feed_message(fm.message, fm.id) }}
+          {{ render_feed_message(fm.message) }}
         {% endfor %}
         
         </div> <!-- row -->
