@@ -17,9 +17,12 @@ def process_message(message):
     
     for friend in friends:
         # post on all of friends feeds the message
-        feed = Feed(
-            user=friend.to_user,
-            message=message
-        ).save()
+        # except if to_user is blocked
+        rel = Relationship.get_relationship(friend.to_user, message.to_user)
+        if rel != "BLOCKED":
+            feed = Feed(
+                user=friend.to_user,
+                message=message
+            ).save()
     
     return True
