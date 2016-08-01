@@ -1,7 +1,7 @@
 from flask import Blueprint, session, render_template
 
 from user.models import User
-from feed.models import Feed, POST
+from feed.models import Feed
 from feed.forms import FeedPostForm
 
 home_app = Blueprint('home_app', __name__)
@@ -17,7 +17,7 @@ def home():
         
         # get user messages
         feed_messages = Feed.objects.filter(
-            user=user,
+            user=user
             ).order_by('-create_date')[:10]
 
         return render_template('home/feed_home.html',
