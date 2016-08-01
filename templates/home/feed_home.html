@@ -1,5 +1,4 @@
 {% extends "base.html" %} 
-{% from "user/_rel_button.html" import rel_button, rel_js %}
 
 {% block title %}Home{% endblock %} 
 
@@ -19,7 +18,7 @@
     
     <div class="row">
       
-      <div class="col-md-9"> <!-- == Posts == -->
+      <div class="col-md-9">
       
         <!-- post text input -->
         <div class="row feed-message">
@@ -43,9 +42,10 @@
           </form>
         </div>
         <!-- post text input -->
+
         {% from "feed/_feed_messages.html" import render_feed_message %}
         {% for fm in feed_messages %}
-          {{ render_feed_message(fm.message) }}
+          {{ render_feed_message(fm.message, fm.id) }}
         {% endfor %}
         
         </div> <!-- row -->
