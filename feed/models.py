@@ -53,7 +53,6 @@ class Message(db.Document):
 class Feed(db.Document):
     user = db.ReferenceField(User, db_field="u", reverse_delete_rule=CASCADE)
     message = db.ReferenceField(Message, db_field="m", reverse_delete_rule=CASCADE)
-    parent = db.ObjectIdField(db_field="p", default=None)
     create_date = db.LongField(db_field="c", default=now())
 
     meta = {
