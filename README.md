@@ -3,8 +3,7 @@
 # Step 29
 
 ## Adding comments to posts
-- Create a message type with post, comment, like
+- Create a message models type with post, comment, like
 - Create a message view and template
+- Add comments to messages
 
-## Making profiles private and show only feed messages
-- Check if logged user and if friends and display messages then from feed

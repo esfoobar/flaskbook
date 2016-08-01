@@ -18,7 +18,6 @@ def home():
         # get user messages
         feed_messages = Feed.objects.filter(
             user=user,
-            message_type=POST
             ).order_by('-create_date')[:10]
 
         return render_template('home/feed_home.html',
