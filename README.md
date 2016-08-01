@@ -8,8 +8,10 @@
 - Fix issue with posting on user's profile
 
 ## Adding likes to posts
-- 
+- Add a like route on feed views
+- Add a get likes method on feed model
+- List likes on the message
 
 ## Comment cleanup
-- Add the comment hyperlink to anchor on message
+- Add the comment hyperlink to anchor on comment form
 - Clear the comment text bug

@@ -38,7 +38,11 @@ class Message(db.Document):
         
     @property
     def comments(self):
-        return Message.objects.filter(parent=self.id).order_by('-created')
+        return Message.objects.filter(parent=self.id, message_type=COMMENT).order_by('create_date')
+
+    @property
+    def likes(self):
+        return Message.objects.filter(parent=self.id, message_type=LIKE).order_by('-create_date')
 
     def post_imgsrc(self, image_ts, size):
         if AWS_BUCKET:
