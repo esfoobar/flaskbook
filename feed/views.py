@@ -34,7 +34,7 @@ def add_message():
         from_user = User.objects.get(username=session.get('username'))
         to_user = User.objects.get(username=request.values.get('to_user'))
         post = form.post.data
-        
+
         # if this is a self post
         if to_user == from_user:
             to_user = None
@@ -68,7 +68,7 @@ def add_message():
         if ref:
             return redirect(ref)
         else:
-            return redirect(url_for('user_app.profile', username=from_user.username))
+            return redirect(url_for('home_app.home'))
             
     else:
         return 'Error!'

@@ -14,7 +14,7 @@ def process_message(message):
         rel_type=Relationship.FRIENDS,
         status=Relationship.APPROVED
     )
-    
+
     for friend in friends:
         # post on all of friends feeds the message
         # except if to_user is blocked
