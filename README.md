@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.com/jorge-3/flaskbook.svg?token=CpgTPHGMFe4PoRnkeQqo&branch=master)](https://travis-ci.com/jorge-3/flaskbook)
 
-# Step 31
+# Step 32
 
-## Don't distribute feed messages to blocked users
-- Modify process.py to not distribute posts to users who the feed user has blocked
+## Resurface posts if liked/commented
+- Add a last updated field and update on that
 
-## Do tests
-- Feed tests
+## Do a nicer home page
+- You know?
 
