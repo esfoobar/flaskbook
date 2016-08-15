@@ -8,3 +8,10 @@
 ## Do a nicer home page
 - You know?
 
+## Docker configuration
+
+### Build the containers
+```docker-compose build```
+
+### Start the application
+```docker-compose up```
