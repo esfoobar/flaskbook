@@ -1,5 +1,6 @@
 SECRET_KEY = 'you-will-never-guess'
 DEBUG = True
+MONGODB_HOST = '' # use 'mongodb' if using Docker
 MONGODB_DB = 'flaskbook'
 HOSTNAME = 'https://you.c9users.io'
 UPLOAD_FOLDER = '/home/ubuntu/workspace/flaskbook/static/images'
