@@ -15,5 +15,7 @@
 ### Build the containers
 ```docker-compose build```
 
+### Copy settings.py.bak to settings.py and add 'mongodb' as MONGODB_HOST
+
 ### Start the application
 ```docker-compose up```

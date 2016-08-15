@@ -7,3 +7,4 @@ UPLOAD_FOLDER = '/opt/flaskbook/static/images'
 STATIC_IMAGE_URL = 'images'
 AWS_BUCKET = ''
 AWS_CONTENT_URL = ''
+AWS_SEND_EMAIL = False
