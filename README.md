@@ -10,6 +10,8 @@
 
 ## Docker configuration
 
+### Checkout code on /opt/flaskbook on local computer
+
 ### Build the containers
 ```docker-compose build```
 
