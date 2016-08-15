@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - /opt/flaskbook:/opt/flaskbook
+    links:
+      - db:mongodb
+  db:
+    image: mongo:3.0.2
