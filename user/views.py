@@ -62,16 +62,16 @@ def register():
                 "confirmation_code": code
                 }
         )
-        
+
         # email the user
         body_html = render_template('mail/user/register.html', user=user)
         body_text = render_template('mail/user/register.txt', user=user)
         email(user.email, "Welcome to Flaskbook", body_html, body_text)
         user.save()
-        
-        return "User registered"
+
+        return redirect(url_for('user_app.login'))
     return render_template('user/register.html', form=form)
-    
+
 @user_app.route('/logout')
 def logout():
     session.pop('username')
@@ -86,14 +86,14 @@ def profile(username, page=1):
     friends_page = False
     user = User.objects.filter(username=username).first()
     profile_messages = []
-    
+
     if user:
         if session.get('username'):
             logged_user = User.objects.filter(
                 username=session.get('username')
                 ).first()
             rel = Relationship.get_relationship(logged_user, user)
-        
+
         # get friends
         friends = Relationship.objects.filter(
             from_user=user,
@@ -101,24 +101,24 @@ def profile(username, page=1):
             status=Relationship.APPROVED
             )
         friends_total = friends.count()
-        
+
         if 'friends' in request.url:
             friends_page = True
             friends = friends.paginate(page=friends_page, per_page=8)
         else:
             friends = friends[:5]
-            
+
         form = FeedPostForm()
-        
+
         # get user messages if friends
         if logged_user and (rel == "SAME" or rel == "FRIENDS_APPROVED"):
             profile_messages = Message.objects.filter(
                 Q(from_user=user) | Q(to_user=user),
                 message_type=POST,
                 ).order_by('-create_date')[:10]
-        
-        return render_template('user/profile.html', 
-            user=user, 
+
+        return render_template('user/profile.html',
+            user=user,
             logged_user=logged_user,
             rel=rel,
             friends=friends,
@@ -151,7 +151,7 @@ def edit():
             # check if new username
             if user.username != form.username.data.lower():
                 if User.objects.filter(username=form.username.data.lower()).first():
-                    error = 'Username already exists'  
+                    error = 'Username already exists'
                 else:
                     session['username'] = form.username.data.lower()
                     form.username.data = form.username.data.lower()
@@ -168,7 +168,7 @@ def edit():
                     user.email_confirmed = False
                     form.email.data = user.email
                     message = "You will need to confirm the new email to complete this change"
-                    
+
                     # email the user
                     body_html = render_template('mail/user/change_email.html', user=user)
                     body_text = render_template('mail/user/change_email.txt', user=user)
@@ -184,7 +184,7 @@ def edit():
         return render_template('user/edit.html', form=form, error=error, message=message, user=user)
     else:
         abort(404)
-        
+
 @user_app.route('/confirm/<username>/<code>')
 def confirm(username, code):
     edit_profile = False
@@ -197,7 +197,7 @@ def confirm(username, code):
             user.save()
             return render_template('user/email_confirmed.html')
     abort(404)
-    
+
 @user_app.route('/forgot', methods=('GET', 'POST'))
 def forgot():
     error = None
@@ -218,11 +218,11 @@ def forgot():
 
         message = "You will receive a password reset email if we find that email in our system"
     return render_template('user/forgot.html', form=form, error=error, message=message)
-    
+
 @user_app.route('/password_reset/<username>/<code>', methods=('GET','POST'))
 def password_reset(username, code):
     require_current = False
-    
+
     form = PasswordResetForm()
 
     user = User.objects.filter(username=username).first()
@@ -241,8 +241,8 @@ def password_reset(username, code):
             if session.get('username'):
                 session.pop('username')
             return redirect(url_for('user_app.password_reset_complete'))
-        
-    return render_template('user/password_reset.html', 
+
+    return render_template('user/password_reset.html',
         form=form,
         require_current=require_current,
         username=username,
@@ -276,10 +276,9 @@ def change_password():
                 return redirect(url_for('user_app.password_reset_complete'))
             else:
                 error = "Incorrect password"
-        
-    return render_template('user/password_reset.html', 
+
+    return render_template('user/password_reset.html',
         form=form,
         require_current=require_current,
         error=error
         )
-
